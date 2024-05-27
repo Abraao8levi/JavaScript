@@ -1,2 +1,2 @@
 # JavaScript
-Estudo de Programação em Javascript
+- Estudo de Programação em Javascript
