@@ -1,92 +1,36 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Temporizador</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #f0f0f0;
-  }
-  #timer {
-    font-size: 36px;
-    margin-top: 50px;
-    color: #333;
-  }
-  #controls {
-    margin-top: 20px;
-  }
-  button {
-    padding: 10px 20px;
-    font-size: 16px;
-    margin: 0 10px;
-    cursor: pointer;
-    border: none;
-    border-radius: 5px;
-    background-color: #4CAF50;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    transition-duration: 0.4s;
-  }
-  button:hover {
-    background-color: #45a049;
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temporizador com Clima e Calendário</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-<h1>Temporizador</h1>
-
-<div id="timer">00:00:00</div>
-<div id="controls">
-  <input type="number" id="minutes" placeholder="Minutos">
-  <button onclick="startTimer()">Iniciar</button>
-  <button onclick="stopTimer()">Parar</button>
-</div>
-
-<script>
-  let timer;
-  let totalTimeInSeconds = 0;
-
-  function startTimer() {
-    const inputMinutes = parseInt(document.getElementById('minutes').value);
-    if (!isNaN(inputMinutes) && inputMinutes > 0) {
-      totalTimeInSeconds = inputMinutes * 60;
-      timer = setInterval(updateTimer, 1000);
-      document.getElementById('controls').innerHTML = '<button onclick="stopTimer()">Parar</button>';
-    } else {
-      alert('Digite um valor válido em minutos.');
-    }
-  }
-
-  function stopTimer() {
-    clearInterval(timer);
-    document.getElementById('controls').innerHTML = '<button onclick="startTimer()">Iniciar</button>';
-  }
-
-  function updateTimer() {
-    const hours = Math.floor(totalTimeInSeconds / 3600);
-    const minutes = Math.floor((totalTimeInSeconds % 3600) / 60);
-    const seconds = totalTimeInSeconds % 60;
-
-    document.getElementById('timer').innerText = formatTime(hours) + ':' + formatTime(minutes) + ':' + formatTime(seconds);
-
-    if (totalTimeInSeconds === 0) {
-      clearInterval(timer);
-      alert('Tempo esgotado!');
-    } else {
-      totalTimeInSeconds--;
-    }
-  }
-
-  function formatTime(time) {
-    return (time < 10 ? '0' : '') + time;
-  }
-</script>
-
+    <header>
+        <h1>Temporizador e Informações do Dia</h1>
+    </header>
+    <div class="container">
+        <div class="temporizador-container">
+            <h2>Temporizador</h2>
+            <div id="timerDisplay">00:00:00</div>
+            <input type="number" id="timerInput" placeholder="Minutos">
+            <button id="startBtn">Iniciar</button>
+            <button id="stopBtn">Parar</button>
+        </div>
+        <div class="clima-container">
+            <h2>Informações do Clima</h2>
+            <p id="localizacao">Localização: Carregando...</p>
+            <p id="temperatura">Temperatura: Carregando...</p>
+            <p id="nascerSol">Nascer do Sol: Carregando...</p>
+            <p id="porSol">Pôr do Sol: Carregando...</p>
+        </div>
+        <div class="calendario-container">
+            <h2>Calendário</h2>
+            <p id="dataAtual">Data: Carregando...</p>
+            <div id="calendarioCompleto"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
